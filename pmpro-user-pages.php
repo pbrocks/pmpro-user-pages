@@ -1,24 +1,24 @@
 <?php
-/*
-Plugin Name: Paid Memberships Pro - User Pages Add On
-Plugin URI: http://www.paidmembershipspro.com/pmpro-user-pages/
-Description: When a user signs up, create a page for them that only they (and admins) have access to.
-Version: .6
-Author: Stranger Studios
-Author URI: http://www.strangerstudios.com
+/**
+ * Plugin Name: Paid Memberships Pro - User Pages Add On
+ * Plugin URI: https://www.paidmembershipspro.com/pmpro-user-pages/
+ * Description: When a user signs up, create a page for them that only they (and admins) have access to.
+ * Version: .6
+ * Author: Stranger Studios
+ * Author URI: https://www.strangerstudios.com
 
 To setup:
 
 	1. Create a top level page to store the user pages, e.g. "Members".
 	2. Navigate to Memberships --> User Pages and complete the settings.
-*/
+ */
 
 // includes
 require_once( dirname( __FILE__ ) . '/includes/settings.php' ); // settings page for dashboard
 
-/*
-	Create user pages at checkout
-*/
+/**
+ * Create user pages at checkout
+ */
 function pmproup_pmpro_after_checkout( $user_id ) {
 	global $wpdb;
 
@@ -72,12 +72,11 @@ function pmproup_pmpro_after_checkout( $user_id ) {
 		}
 	}
 }
-// add_action("pmpro_after_checkout", "pmproup_pmpro_after_checkout");
-/*
-	Instead of hooking into pmpro_after_checkout,
-	let's hook into pmpro_after_change_membership_level
-	and then call that old function.
-*/
+// add_action( 'pmpro_after_checkout', 'pmproup_pmpro_after_checkout' );
+/**
+ * Instead of hooking into pmpro_after_checkout, let's hook into
+ * pmpro_after_change_membership_level and then call that old function.
+ */
 function pmproup_pmpro_after_change_membership_level( $level_id, $user_id ) {
 	return pmproup_pmpro_after_checkout( $user_id );
 }
@@ -239,11 +238,11 @@ function pmproup_pmpro_confirmation_message( $message ) {
 }
 add_action( 'pmpro_confirmation_message', 'pmproup_pmpro_confirmation_message' );
 
-/*
-	Remove user pages from frontend searches/etc.
-
-	All user pages are children of the User Pages parent page. So lets hide those pages (the main user pages) and the children of those pages (the purchased pages).
-*/
+/**
+ * Remove user pages from frontend searches/etc.
+ *
+ * All user pages are children of the User Pages parent page. So lets hide those pages (the main user pages) and the children of those pages (the purchased pages).
+ */
 function pmproup_pre_get_posts( $query ) {
 	$options = pmproup_getOptions();
 
@@ -284,14 +283,14 @@ function pmproup_pre_get_posts( $query ) {
 }
 add_filter( 'pre_get_posts', 'pmproup_pre_get_posts' );
 
-/*
-Function to add links to the plugin row meta
-*/
+/**
+ * Function to add links to the plugin row meta
+ */
 function pmproup_plugin_row_meta( $links, $file ) {
 	if ( strpos( $file, 'pmpro-user-pages.php' ) !== false ) {
 		$new_links = array(
-			'<a href="' . esc_url( 'http://www.paidmembershipspro.com/add-ons/plus-add-ons/pmpro-user-pages/' ) . '" title="' . esc_attr( __( 'View Documentation', 'pmpro' ) ) . '">' . __( 'Docs', 'pmpro' ) . '</a>',
-			'<a href="' . esc_url( 'http://paidmembershipspro.com/support/' ) . '" title="' . esc_attr( __( 'Visit Customer Support Forum', 'pmpro' ) ) . '">' . __( 'Support', 'pmpro' ) . '</a>',
+			'<a href="' . esc_url( 'https://www.paidmembershipspro.com/add-ons/plus-add-ons/pmpro-user-pages/' ) . '" title="' . esc_attr( __( 'View Documentation', 'pmpro' ) ) . '">' . __( 'Docs', 'pmpro' ) . '</a>',
+			'<a href="' . esc_url( 'https://paidmembershipspro.com/support/' ) . '" title="' . esc_attr( __( 'Visit Customer Support Forum', 'pmpro' ) ) . '">' . __( 'Support', 'pmpro' ) . '</a>',
 		);
 		$links = array_merge( $links, $new_links );
 	}

@@ -1,7 +1,7 @@
 <?php
-/*
-	Function get options.
-*/
+/**
+ * Function get options.
+ */
 function pmproup_getOptions() {
 	$options = get_option( 'pmpro_user_pages', false );
 
@@ -32,17 +32,17 @@ function pmproup_getOptions() {
 	return $options;
 }
 
-/*
-	Add user pages settings page to admin
-*/
+/**
+ *  Add user pages settings page to admin
+ */
 function pmproup_add_pages() {
 	add_submenu_page( 'pmpro-membershiplevels', 'User Pages', 'User Pages', 'manage_options', 'pmpro-user-pages', 'pmproup_adminpage' );
 }
 add_action( 'admin_menu', 'pmproup_add_pages', 20 );
 
-/*
-	Add page to admin bar
-*/
+/**
+ *  Add page to admin bar
+ */
 function pmproup_admin_bar_menu() {
 	global $wp_admin_bar;
 	if ( ! is_super_admin() || ! is_admin_bar_showing() ) {
@@ -59,9 +59,9 @@ function pmproup_admin_bar_menu() {
 }
 add_action( 'admin_bar_menu', 'pmproup_admin_bar_menu', 1000 );
 
-/*
-	Settings Page
-*/
+/**
+ *  Settings Page
+ */
 function pmproup_adminpage() {
 	global $wpdb;
 
@@ -153,7 +153,7 @@ function pmproup_adminpage() {
 							);
 						?>
 						
-											</td>
+					</td>
 				</tr>
 			</tbody>
 			</table>
@@ -175,9 +175,9 @@ function pmproup_adminpage() {
 							foreach ( $levels as $level ) {
 								?>
 								<option value="<?php echo $level->id; ?>" 
-															<?php
-															if ( in_array( $level->id, $options['levels'] ) ) {
-																echo 'selected="selected"';}
+				<?php
+				if ( in_array( $level->id, $options['levels'] ) ) {
+					echo 'selected="selected"';}
 ?>
 ><?php echo $level->name; ?></option>
 								<?php
