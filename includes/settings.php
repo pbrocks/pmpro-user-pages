@@ -95,6 +95,7 @@ function pmproup_adminpage() {
 			$member_ids = $wpdb->get_col( "SELECT user_id FROM $wpdb->pmpro_memberships_users WHERE status = 'active' AND membership_id IN('" . implode( "','", $levels ) . "')" );
 
 			// loop through
+			// pbrx BEGIN create Admin Message
 			if ( ! empty( $member_ids ) ) {
 				echo '<p>Generating user pages... ';
 
