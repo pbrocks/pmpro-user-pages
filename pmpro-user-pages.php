@@ -15,6 +15,7 @@ To setup:
 
 // includes
 require_once( dirname( __FILE__ ) . '/includes/settings.php' ); // settings page for dashboard
+require_once( dirname( __FILE__ ) . '/includes/class-pmpro-userpage-settings.php' ); // settings page for dashboard
 
 /**
  * Create user pages at checkout
